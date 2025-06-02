@@ -1,17 +1,18 @@
-name: Example workflow for dotNET using Snyk
+name: Full Snyk Security Workflow for .NET
 
 on: push
 
 jobs:
   security:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'  # or whichever version your project uses
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
         run: dotnet restore
@@ -19,8 +20,25 @@ jobs:
       - name: Build the project
         run: dotnet build --no-restore --configuration Release
 
-      - name: Run Snyk to check for vulnerabilities
+      # Install Snyk CLI
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      # Snyk Open Source Dependency Test
+      - name: Snyk Open Source Test
         uses: snyk/actions/dotnet@master
         continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Snyk Code (Static Application Security Testing)
+      - name: Snyk Code Test
+        run: snyk code test || true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Snyk Infrastructure as Code Test
+      - name: Snyk IaC Test
+        run: snyk iac test || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
