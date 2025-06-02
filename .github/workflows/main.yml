@@ -51,4 +51,3 @@ jobs:
         run: snyk iac test || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-Editing dotNet-goof/.github/workflows/main.yml at master · ily-snyk/dotNet-goof
