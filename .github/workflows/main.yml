@@ -1,3 +1,25 @@
+Skip to content
+Navigation Menu
+ily-snyk
+dotNet-goof
+
+Type / to search
+Code
+Pull requests
+1
+Actions
+Projects
+Wiki
+Security
+1
+Insights
+Settings
+Full Snyk Security Workflow for .NET
+Update main.yml #6
+Jobs
+Run details
+Workflow file for this run
+.github/workflows/main.yml at ffe3574
 name: Full Snyk Security Workflow for .NET
 
 on:
@@ -23,7 +45,6 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-
       - name: Restore dependencies
         run: dotnet restore
 
@@ -43,17 +64,13 @@ jobs:
 
       # Snyk Code (Static Application Security Testing)
       - name: Snyk Code Test
-        run: snyk code test --sarif-file-output=snyk-code.sarif || true
+        run: snyk code test || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk-code.sarif
 
       # Snyk Infrastructure as Code Test
       - name: Snyk IaC Test
-        run: snyk iac test --report || true
+        run: snyk iac test || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+Editing dotNet-goof/.github/workflows/main.yml at master · ily-snyk/dotNet-goof
