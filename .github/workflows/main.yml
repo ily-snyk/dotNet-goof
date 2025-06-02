@@ -1,25 +1,3 @@
-Skip to content
-Navigation Menu
-ily-snyk
-dotNet-goof
-
-Type / to search
-Code
-Pull requests
-1
-Actions
-Projects
-Wiki
-Security
-1
-Insights
-Settings
-Full Snyk Security Workflow for .NET
-Update main.yml #6
-Jobs
-Run details
-Workflow file for this run
-.github/workflows/main.yml at ffe3574
 name: Full Snyk Security Workflow for .NET
 
 on:
