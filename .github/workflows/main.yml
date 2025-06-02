@@ -43,12 +43,17 @@ jobs:
 
       # Snyk Code (Static Application Security Testing)
       - name: Snyk Code Test
-        run: snyk code test || true
+        run: snyk code test --sarif-file-output=snyk-code.sarif || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk-code.sarif
+
       # Snyk Infrastructure as Code Test
       - name: Snyk IaC Test
-        run: snyk iac test || true
+        run: snyk iac test --report || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
