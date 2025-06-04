@@ -35,7 +35,7 @@ jobs:
 
       # Snyk Open Source Dependency Test
       - name: Snyk Open Source Test
-        uses: snyk/actions/dotnet@master
+        run: snyk test --severity-threshold=high 
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
